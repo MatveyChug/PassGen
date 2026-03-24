@@ -109,6 +109,7 @@ fun PassGenerator(length: Int = 16, code: String = "1234", customSymbols: String
 
     val activeSet = mutableListOf<String>()
 
+    // Кастомизация генерации
     if (code.toString().contains("1")) activeSet.add(upper)
     if (code.toString().contains("2")) activeSet.add(lower)
     if (code.toString().contains("3")) activeSet.add(digits)
@@ -126,11 +127,8 @@ fun PassGenerator(length: Int = 16, code: String = "1234", customSymbols: String
 
     val allChars = activeSet.joinToString("") // Преобразуем список в одну строку
 
-    //activeSets.size - кол-во строк в списке
-
     repeat(length - activeSet.size) { // генерация оставшихся символов
         password.append(allChars[random.nextInt(allChars.length)])
-
     }
 
     val finalPassword = password.toString().toCharArray().apply { shuffle() }.concatToString()
@@ -877,23 +875,6 @@ fun InfoScreen(navController: NavController){
                     color = textColor
                 )
             }
-        }
-        Spacer(modifier = Modifier.weight(1f))
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 30.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ){
-            Text(
-                text = "По вопросам и предложениям:\n@motchug в Telegram",
-                fontSize = 18.sp,
-                fontFamily = google_sans_fonts,
-                textAlign = TextAlign.Center,
-                color = textColor
-            )
         }
     }
 }
